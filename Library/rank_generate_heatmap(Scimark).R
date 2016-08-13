@@ -1,0 +1,27 @@
+#!/usr/bin/env Rscript
+args = commandArgs(trailingOnly=TRUE)
+library('reshape')
+library('plyr')
+library('scales')
+library('ggplot2')
+
+nba <- read.csv(paste(args[1],args[2], sep=""), sep=",")
+nba$scimark.fft.large<-as.integer(rank(-nba$scimark.fft.large))
+nba$scimark.lu.large<-as.integer(rank(-nba$scimark.lu.large))
+nba$scimark.monte_carlo<-as.integer(rank(-nba$scimark.monte_carlo))
+nba$scimark.sor.large<-as.integer(rank(-nba$scimark.sor.large))
+nba$scimark.sparse.large<-as.integer(rank(-nba$scimark.sparse.large))
+nba$sunflow<-as.integer(rank(-nba$sunflow))
+nba$name <- factor(nba$name, levels = rev(levels(nba$name)))
+row.names(nba) <- nba$name
+nba.m <- melt(nba)
+nba.m <- ddply(nba.m, .(variable), transform,
+  rescale = rescale(value,to=c(1,31)))
+p<-((ggplot(nba.m, aes(variable, name))
+     + geom_tile(aes(fill = rescale),colour = "white")
+     + scale_fill_gradient(low = "steelblue",high = "white"))
+     + xlab("Benchmark names")
+     + ylab("Cluster names")
+     + theme(axis.text.x = element_text(angle=90,vjust=0.5)))
+write.csv(nba, file = paste(args[1],args[4],"ranking.csv", sep=""))
+ggsave(paste(args[1],args[3],sep=""),width=3, height=5, p)

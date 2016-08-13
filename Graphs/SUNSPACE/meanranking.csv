@@ -1,0 +1,8 @@
+"","name","scimark.fft.large","scimark.lu.large","scimark.monte_carlo","scimark.sor.large","scimark.sparse.large","sunflow"
+"SUNSPACE06","SUNSPACE06",1,1,1,1,1,1
+"SUNSPACE07","SUNSPACE07",2,3,3,2,2,3
+"SUNSPACE09","SUNSPACE09",3,2,6,3,3,2
+"SUNSPACE11","SUNSPACE11",7,7,5,7,7,5
+"SUNSPACE12","SUNSPACE12",5,5,7,5,5,6
+"SUNSPACE13","SUNSPACE13",4,4,2,4,4,4
+"SUNSPACE14","SUNSPACE14",6,6,4,6,6,7
