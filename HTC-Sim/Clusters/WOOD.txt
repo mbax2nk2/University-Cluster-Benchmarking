@@ -1,0 +1,38 @@
+# The WOOD Cluster - Old Library User Area
+#Static
+CLUSTER_NAME=WOOD
+CPU_SPEED=3.0
+CPU_NORMAL=1.0
+CPU_CORES=4
+WATTS_ACTIVE=57
+WATTS_IDLE=40
+WATTS_SLEEP=2
+MEMORY=4096
+CPU_TYPE=i64
+OS=WIN61
+#I_O=1.885636383
+#CPU_OPERATION=1.870576277
+scale=1.02
+#Dynamic
+#
+# Date type, Start, reboot computer, Condor can use, Condor and user simultaneously, end, time to sleep, time before condor can use
+#
+# From 08:30 to 16:50 computers can be used and will shut down after 60 mins of inactivity, Condor start after 15 mins
+CLUSTER_STATE=TERM_WEEK, 08:30, False, False, True, 16:50, 01:00, 00:15, True
+#
+# From 16:50 to 08:30 computers can be used and will shut down after 15 mins of inactivity, Condor start immediately
+CLUSTER_STATE=TERM_WEEK, 16:50, False, False, True, 24:00, 00:15, 00:00, False
+CLUSTER_STATE=TERM_WEEK, 00:00, False, False, True, 08:30, 00:15, 00:00, False
+# Ditto all day at weekends
+CLUSTER_STATE=TERM_WEEKEND, 00:00, False, False, True, 24:00, 00:15, 00:00, False
+#
+#NB Powersave system is not currently aware of NON-TERM or BANK HOLIDAYS
+#
+#NB PC reboots are deferred if Condor job is running, so don't need to deal with these
+#
+# Reboot at 3 am
+CLUSTER_STATE=TERM_WEEK, 03:00, True, False, False, 03:00, 00:00, 00:00, False
+CLUSTER_STATE=TERM_WEEKEND, 03:00, True, False, False, 03:00, 00:00, 00:00, False
+# Cluster closed for upgrade
+# CLUSTER_STATE=SPECIAL, 2010-01-01, 2010-01-07, 00:00, False, False, False, 24:00, 00:00, 00:10
+PUE=1.0

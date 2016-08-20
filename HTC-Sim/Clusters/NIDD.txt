@@ -1,0 +1,38 @@
+# The ORACLE Cluster - 4th floor Merz
+#Static
+CLUSTER_NAME=NIDD
+CPU_SPEED=3.0
+CPU_NORMAL=1.0
+CPU_CORES=4
+WATTS_ACTIVE=57
+WATTS_IDLE=40
+WATTS_SLEEP=2
+MEMORY=4096
+CPU_TYPE=i64
+OS=WIN61
+#I_O=1.858767648
+#CPU_OPERATION=1.886840888
+scale=1.32
+#Dynamic
+#
+# Date type, Start, reboot computer, Condor can use, Condor and user simultaneously, end, time to sleep, time before condor can use
+#
+# From 08:00 to 17:00 computers can be used and will shut down after 60 mins of inactivity, Condor start after 15 mins
+CLUSTER_STATE=TERM_WEEK, 08:00, False, True, True, 17:00, 01:00, 00:15, True
+#
+# From 18:00 to 08:30 computers can be used and will shut down after 15 mins of inactivity, Condor start immediately
+CLUSTER_STATE=TERM_WEEK, 17:00, False, True, True, 24:00, 00:15, 00:00, False
+CLUSTER_STATE=TERM_WEEK, 00:00, False, True, True, 08:00, 00:15, 00:00, False
+# Ditto all day at weekends
+CLUSTER_STATE=TERM_WEEKEND, 00:00, False, True, True, 24:00, 00:15, 00:00, False
+#
+#NB Powersave system is not currently aware of NON-TERM or BANK HOLIDAYS
+#
+#NB PC reboots are deferred if Condor job is running, so don't need to deal with these
+#
+# Reboot at 3 am
+CLUSTER_STATE=TERM_WEEK, 03:00, True, False, False, 03:00, 00:00, 00:00, False
+CLUSTER_STATE=TERM_WEEKEND, 03:00, True, False, False, 03:00, 00:00, 00:00, False
+# Cluster closed for upgrade
+# CLUSTER_STATE=SPECIAL, 2010-01-01, 2010-01-07, 00:00, False, False, False, 24:00, 00:00, 00:10
+PUE=1.4

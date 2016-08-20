@@ -1,0 +1,34 @@
+# The SIDE Cluster - First floor Bedson
+#Static
+CLUSTER_NAME=SIDE
+CPU_SPEED=3.0
+CPU_NORMAL=1.0
+CPU_CORES=4
+WATTS_ACTIVE=100
+WATTS_IDLE=55
+WATTS_SLEEP=4
+MEMORY=4096
+CPU_TYPE=i64
+OS=WIN61
+#I_O=1.839866695
+#CPU_OPERATION=1.877703998
+scale=0.87
+#Dynamic
+#
+# Date type, Start, reboot computer, Condor can use, Condor and user simultaneously, end, time to sleep, time before condor can use
+#
+# From 00:00 to 24:00 computers can be used and will shut down after 60 mins of inactivity, Condor start after 15 mins
+CLUSTER_STATE=TERM_WEEK, 00:00, False, True, True, 24:00, 01:00, 00:15, True
+# Ditto all day at weekends
+CLUSTER_STATE=TERM_WEEKEND, 00:00, False, True, True, 24:00, 01:00, 00:15, True
+#
+#NB Powersave system is not currently aware of NON-TERM or BANK HOLIDAYS
+#
+#NB PC reboots are deferred if Condor job is running, so don't need to deal with these
+#
+# Reboot at 3 am
+CLUSTER_STATE=TERM_WEEK, 03:00, True, False, False, 03:00, 00:00, 00:00, False
+CLUSTER_STATE=TERM_WEEKEND, 03:00, True, False, False, 03:00, 00:00, 00:00, False
+# Cluster closed for upgrade
+# CLUSTER_STATE=SPECIAL, 2010-01-01, 2010-01-07, 00:00, False, False, False, 24:00, 00:00, 00:10
+PUE=1.0
